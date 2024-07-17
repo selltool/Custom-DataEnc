@@ -41,11 +41,12 @@ app.get('/', (req, res) => {
 })
 app.post('/', async (req, res) => {
     const receivedData = req.body;
+    console.log(receivedData.data)
     let data = await wasmEnc(wasmData, receivedData.data, "0")
     res.status(200).json({
         data: data
     });
 })
 app.listen(1811, () => {
-    console.log('Server is running on port 3000')
+    console.log('Server is running on port 1811')
 })
