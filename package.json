@@ -9,6 +9,7 @@
   "private": true,
   "dependencies": {
     "express": "^4.19.2",
+    "nodejs-jsencrypt": "^3.0.0-rc.1",
     "undici": "^6.19.2"
   },
   "devDependencies": {

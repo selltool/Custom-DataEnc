@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const {Client} = require("undici");
+const {JSEncrypt} = require('nodejs-jsencrypt');
 const {wasmEnc} = require("./utils/LoadWasm");
 app.use(express.json());
 
@@ -41,12 +42,23 @@ app.get('/', (req, res) => {
 })
 app.post('/', async (req, res) => {
     const receivedData = req.body;
-    console.log(receivedData.data)
+    // console.log(receivedData.data)
     let data = await wasmEnc(wasmData, receivedData.data, "0")
     res.status(200).json({
         data: data
     });
 })
+app.post('/encrypt-vietinbank-biz', async (req, res) => {
+        const receivedData = req.body;
+        // console.log(receivedData.data)
+        let encrypt = new JSEncrypt();
+        encrypt.setPublicKey('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCz1zqQHtHvKczHh58ePiRNgOyiHEx6lZDPlvwBTaHmkNlQyyJ06SIlMU1pmGKxILjT7n06nxG7LlFVUN5MkW/jwF39/+drkHM5B0kh+hPQygFjRq81yxvLwolt+Vq7h+CTU0Z1wkFABcTeQQldZkJlTpyx0c3+jq0o47wIFjq5fwIDAQAB');
+        let dataEncrypt = encrypt.encrypt(receivedData.data)
+        res.status(200).json({
+            data: dataEncrypt
+        });
+    }
+)
 app.listen(1811, () => {
     console.log('Server is running on port 1811')
 })
