@@ -54,6 +54,7 @@ app.post('/encrypt-vietinbank-biz', async (req, res) => {
         let encrypt = new JSEncrypt();
         encrypt.setPublicKey('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCz1zqQHtHvKczHh58ePiRNgOyiHEx6lZDPlvwBTaHmkNlQyyJ06SIlMU1pmGKxILjT7n06nxG7LlFVUN5MkW/jwF39/+drkHM5B0kh+hPQygFjRq81yxvLwolt+Vq7h+CTU0Z1wkFABcTeQQldZkJlTpyx0c3+jq0o47wIFjq5fwIDAQAB');
         let dataEncrypt = encrypt.encrypt(receivedData.data)
+        console.log(dataEncrypt)
         res.status(200).json({
             data: dataEncrypt
         });
